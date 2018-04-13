@@ -1,0 +1,60 @@
+﻿@{
+    ViewBag.Title = "Calendar";
+    Layout = "~/Views/Shared/_Unify.cshtml";
+}
+
+<div class="container content profile">
+    <div class="row">
+
+        <div class="heading heading-v1">
+            <h2>@Model.CurrentMonthName @Model.CurrentYear <span class="color-green">Events</span></h2>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-2">@Html.ActionLink("PREVIOUS", "Index", "Calendar", new { month = (Model.CurrentMonth == 1 ? 12 : Model.CurrentMonth - 1), year = Model.CurrentYear - (Model.CurrentMonth == 1 ? 1 : 0) }, null)</div>
+                <div class="col-xs-8"> </div>
+                <div class="col-xs-2">@Html.ActionLink("NEXT", "Index", "Calendar", new { month = (Model.CurrentMonth == 12 ? 1 : Model.CurrentMonth + 1), year = Model.CurrentYear + (Model.CurrentMonth == 12 ? 1 : 0) }, null)</div>
+            </div>
+            <div class='row'>
+                @{int i = 1; int weeklyTotal = 0;}
+                @foreach (var activity in Model.MonthlyActivities)
+                {
+                    var isToday = activity.Day == DateTime.Now.Day && Model.CurrentMonth == DateTime.Now.Month && Model.CurrentYear == DateTime.Now.Year;
+                    var color = isToday ? "red" : "";
+
+                    <div class="col-xs-1 @color">
+                        @activity.Day
+                        <hr />
+                        @if (activity.Events != null)
+                        { 
+                            foreach (var race in activity.Events)
+                            {
+                                //weeklyTotal += race.Distance;
+                                <h2>@race.Time<span class="pull-right color-green">@race.Distance</span></h2>
+                                <p>@race.Race</p>
+
+                                <i class="fa fa-clock-o"></i> @race.Date
+                                  
+                                <a class="likes"><i class="icon-speedometer"></i> Pace - @race.Pace</a>
+                            }
+                        }
+                    </div>
+
+                    if (i > 1 && i < 42 && i % 7 == 0)
+                    {
+                        <div>Total: @weeklyTotal</div>
+                        weeklyTotal = 0;
+                        @Html.Raw("</div>")
+                        @Html.Raw("<div class='row'>")
+                    }
+
+                    i++;
+                }
+            </div>
+        </div>
+        <br /><br />
+
+        
+    </div>
+</div><!--/container-->

@@ -1,0 +1,262 @@
+﻿@{
+    ViewBag.Title = Model.ProfileName;
+    Layout = "~/Views/Shared/_Unify.cshtml";
+}
+
+<div class="container content profile">
+    <div class="row">
+        <!--Left Sidebar-->
+        <div class="col-md-3 md-margin-bottom-40">
+            <img class="img-responsive profile-img margin-bottom-20" src="~/Images/@Model.ProfileImage" alt="">
+
+            <div class="margin-bottom-20"><a href="/calendar/@Model.ProfileName"><i class="fa fa-calendar" aria-hidden="true"></i> View Calendar</a></div>
+
+            @*<ul class="list-group sidebar-nav-v1 margin-bottom-40" id="sidebar-nav-1">
+                    <li class="list-group-item active">
+                        <a href="page_profile.html"><i class="fa fa-bar-chart-o"></i> Overall</a>
+                    </li>
+                    <li class="list-group-item">
+                        <a href="page_profile_me.html"><i class="fa fa-user"></i> Profile</a>
+                    </li>
+                    <li class="list-group-item">
+                        <a href="page_profile_users.html"><i class="fa fa-group"></i> Time Calculator</a>
+                    </li>
+                    <li class="list-group-item">
+                        <a href="page_profile_history.html"><i class="fa fa-history"></i> Race History</a>
+                    </li>
+                </ul>
+
+                <hr />*@
+
+            <!-- Distance Totals Start -->
+            <div class="panel-heading-v2 overflow-h">
+                <h2 class="heading-xs pull-left"><i class="fa fa-road"></i> Total Distances</h2><br /><br />
+                <p>Total running miles by training season</p>
+            </div>
+            <div class="table-search-v1 margin-bottom-20">
+                <div class="table-responsive">
+                    <table class="table table-hover table-bordered table-striped">
+                        <tbody>
+                            @foreach (var period in Model.DistanceTotals)
+                            {
+                                <tr>
+                                    <td>@period.Season</td>
+                                    <td>@period.Miles</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <!-- Distance Totals End -->
+
+            <!-- Best Pace Times Table -->
+            <div class="panel-heading-v2 overflow-h">
+                <h2 class="heading-xs pull-left"><i class="fa fa-bar-chart-o"></i> Best Paces</h2><br /><br />
+                <p>Calculated based on best paces for at least the given distance (not real races).</p>
+            </div>
+            <div class="table-search-v1 margin-bottom-20">
+                <div class="table-responsive">
+                    <table class="table table-hover table-bordered table-striped">
+                        <thead>
+                            <tr>
+                                <th>Race</th>
+                                <th>Time</th>
+                                <th>Pace</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var race in Model.BestPaces)
+                            {
+                                <tr>
+                                    <td>
+                                        <a href="#">@race.Distance</a>
+                                    </td>
+                                    <td class="td-width">@race.Time</td>
+                                    <td>
+                                        @race.Pace
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <!-- Best Pace Times Table End -->
+
+            <hr>
+
+
+
+            <div class="margin-bottom-50"></div>
+
+            <!--Datepicker-->
+            <form action="#" id="sky-form2" class="sky-form">
+                <div id="inline-start"></div>
+            </form>
+            <!--End Datepicker-->
+        </div>
+        <!--End Left Sidebar-->
+        <!-- Profile Content -->
+        <div class="col-md-9">
+            <div class="profile-body">
+                <!--Service Block v3-->
+                <div class="row margin-bottom-20">
+                    <div class="col-sm-6 sm-margin-bottom-20">
+                        <div class="service-block-v3 service-block-red">
+                            <i class="icon-speedometer"></i>
+                            <span class="service-heading">Best 5k</span>
+                            <span style="font-size: 30px; line-height: 1; display: block; color: white;">@Model.Fastest5kTime</span>
+
+                            <div class="clearfix margin-bottom-10"></div>
+
+                            <div class="row margin-bottom-20">
+                                <div class="col-xs-3 service-in">
+                                    <small>Date</small>
+                                    <h4>@Model.Fastest5kDate</h4>
+                                </div>
+                                <div class="col-xs-9 text-right service-in">
+                                    <small>Race</small>
+                                    <h4>@Model.Fastest5kRace</h4>
+                                </div>
+                            </div>
+                            <div class="statistics">
+                                <h3 class="heading-xs">@Model.Goal5kTime Goal Progress<span class="pull-right">@Model.Fastest5kGoalPercent%</span></h3>
+                                <div class="progress progress-u progress-xxs">
+                                    <div style="width: @Model.Fastest5kGoalPercent%" aria-valuemax="100" aria-valuemin="0" aria-valuenow="67" role="progressbar" class="progress-bar progress-bar-light">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6 sm-margin-bottom-20">
+                        <div class="service-block-v3 service-block-blue">
+                            <i class="icon-energy"></i>
+                            <span class="service-heading">Best 10k</span>
+                            <span style="font-size: 30px; line-height: 1; display: block; color: white;">@Model.Fastest10kTime</span>
+
+                            <div class="clearfix margin-bottom-10"></div>
+
+                            <div class="row margin-bottom-20">
+                                <div class="col-xs-3 service-in">
+                                    <small>Date</small>
+                                    <h4>@Model.Fastest10kDate</h4>
+                                </div>
+                                <div class="col-xs-9 text-right service-in">
+                                    <small>Race</small>
+                                    <h4>@Model.Fastest10kRace</h4>
+                                </div>
+                            </div>
+                            <div class="statistics">
+                                <h3 class="heading-xs">@Model.Goal10kTime Goal Progress<span class="pull-right">@Model.Fastest10kGoalPercent%</span></h3>
+                                <div class="progress progress-u progress-xxs">
+                                    <div style="width: @Model.Fastest10kGoalPercent%" aria-valuemax="100" aria-valuemin="0" aria-valuenow="67" role="progressbar" class="progress-bar progress-bar-light">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row margin-bottom-10">
+                    <div class="col-sm-6 sm-margin-bottom-20">
+                        <div class="service-block-v3 service-block-green">
+                            <i class="icon-badge"></i>
+                            <span class="service-heading">Best Half-Marathon</span>
+                            <span style="font-size: 30px; line-height: 1; display: block; color: white;">@Model.FastestHalfTime</span>
+
+                            <div class="clearfix margin-bottom-10"></div>
+
+                            <div class="row margin-bottom-20">
+                                <div class="col-xs-3 service-in">
+                                    <small>Date</small>
+                                    <h4>@Model.FastestHalfDate</h4>
+                                </div>
+                                <div class="col-xs-9 text-right service-in">
+                                    <small>Race</small>
+                                    <h4>@Model.FastestHalfRace</h4>
+                                </div>
+                            </div>
+                            <div class="statistics">
+                                <h3 class="heading-xs">@Model.GoalHalfTime Goal Progress<span class="pull-right">@Model.FastestHalfGoalPercent%</span></h3>
+                                <div class="progress progress-u progress-xxs">
+                                    <div style="width: @Model.FastestHalfGoalPercent%" aria-valuemax="100" aria-valuemin="0" aria-valuenow="67" role="progressbar" class="progress-bar progress-bar-light">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6 sm-margin-bottom-20">
+                        <div class="service-block-v3 service-block-u">
+                            <i class="icon-trophy"></i>
+                            <span class="service-heading">Best Marathon</span>
+                            <span style="font-size: 30px; line-height: 1; display: block; color: white;">@Model.FastestMarathonTime</span>
+
+                            <div class="clearfix margin-bottom-10"></div>
+
+                            <div class="row margin-bottom-20">
+                                <div class="col-xs-3 service-in">
+                                    <small>Date</small>
+                                    <h4>@Model.FastestMarathonDate</h4>
+                                </div>
+                                <div class="col-xs-9 text-right service-in">
+                                    <small>Race</small>
+                                    <h4>@Model.FastestMarathonRace</h4>
+                                </div>
+                            </div>
+                            <div class="statistics">
+                                <h3 class="heading-xs">@Model.GoalMarathonTime Goal Progress<span class="pull-right">@Model.FastestMarathonGoalPercent%</span></h3>
+                                <div class="progress progress-u progress-xxs">
+                                    <div style="width: @Model.FastestMarathonGoalPercent%" aria-valuemax="100" aria-valuemin="0" aria-valuenow="67" role="progressbar" class="progress-bar progress-bar-light">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div><!--/end row-->
+                <!--End Service Block v3-->
+
+                <hr />
+                <div class="heading heading-v1">
+                    <h2>Recent <span class="color-green">Events</span></h2>
+                </div>
+
+                <!-- Begin Timeline v1 -->
+                <ul class="timeline-v1">
+                    @{int i = 0;}
+                    @foreach (var race in Model.RecentRaces)
+                    {
+                        if (i % 2 == 0)
+                        {
+                            @Html.Raw("<li>")
+                        }
+                        else
+                        {
+                            @Html.Raw("<li class=\"timeline-inverted\">")
+                        }
+
+                        <div class="timeline-badge primary"><i class="glyphicon glyphicon-record"></i></div>
+                            <div class="timeline-panel">
+                                <div class="timeline-body text-justify">
+                                    <h2>@race.Time<span class="pull-right color-green">@race.Distance</span></h2>
+                                    <p>@race.Race</p>
+                                </div>
+                                <div class="timeline-footer">
+                                    <ul class="list-unstyled list-inline blog-info">
+                                        <li><i class="fa fa-clock-o"></i> @race.Date</li>
+                                    </ul>
+                                    <a class="likes"><i class="icon-speedometer"></i> Pace - @race.Pace</a>
+                                </div>
+                            </div>
+                            @Html.Raw("</li>")
+                        i++;
+                    }
+                    <li class="clearfix" style="float: none;"></li>
+                </ul>
+                <!-- End Timeline v1 -->
+            </div>
+        </div>
+        <!-- End Profile Content -->
+    </div>
+</div><!--/container-->

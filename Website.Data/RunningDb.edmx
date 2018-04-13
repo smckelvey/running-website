@@ -1,0 +1,264 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="RunningDbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="RunningActivity">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Activity" Type="nvarchar" MaxLength="255" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="RunningEvent">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PersonId" Type="int" Nullable="false" />
+          <Property Name="ActivityId" Type="int" Nullable="false" />
+          <Property Name="Date" Type="date" Nullable="false" />
+          <Property Name="Duration" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="UnitId" Type="int" Nullable="false" />
+          <Property Name="Race" Type="nvarchar" MaxLength="255" />
+          <Property Name="Notes" Type="nvarchar" MaxLength="255" />
+          <Property Name="Distance" Type="float" />
+        </EntityType>
+        <EntityType Name="RunningPerson">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Person" Type="nvarchar" MaxLength="255" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="RunningUnit">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Unit" Type="nvarchar" MaxLength="255" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__RunningEv__Activ__3C69FB99">
+          <End Role="RunningActivity" Type="Self.RunningActivity" Multiplicity="1" />
+          <End Role="RunningEvent" Type="Self.RunningEvent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RunningActivity">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="RunningEvent">
+              <PropertyRef Name="ActivityId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__RunningEv__Perso__3D5E1FD2">
+          <End Role="RunningPerson" Type="Self.RunningPerson" Multiplicity="1" />
+          <End Role="RunningEvent" Type="Self.RunningEvent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RunningPerson">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="RunningEvent">
+              <PropertyRef Name="PersonId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__RunningEv__UnitI__3E52440B">
+          <End Role="RunningUnit" Type="Self.RunningUnit" Multiplicity="1" />
+          <End Role="RunningEvent" Type="Self.RunningEvent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RunningUnit">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="RunningEvent">
+              <PropertyRef Name="UnitId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="RunningDbModelStoreContainer">
+          <EntitySet Name="RunningActivity" EntityType="Self.RunningActivity" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RunningEvent" EntityType="Self.RunningEvent" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RunningPerson" EntityType="Self.RunningPerson" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RunningUnit" EntityType="Self.RunningUnit" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__RunningEv__Activ__3C69FB99" Association="Self.FK__RunningEv__Activ__3C69FB99">
+            <End Role="RunningActivity" EntitySet="RunningActivity" />
+            <End Role="RunningEvent" EntitySet="RunningEvent" />
+          </AssociationSet>
+          <AssociationSet Name="FK__RunningEv__Perso__3D5E1FD2" Association="Self.FK__RunningEv__Perso__3D5E1FD2">
+            <End Role="RunningPerson" EntitySet="RunningPerson" />
+            <End Role="RunningEvent" EntitySet="RunningEvent" />
+          </AssociationSet>
+          <AssociationSet Name="FK__RunningEv__UnitI__3E52440B" Association="Self.FK__RunningEv__UnitI__3E52440B">
+            <End Role="RunningUnit" EntitySet="RunningUnit" />
+            <End Role="RunningEvent" EntitySet="RunningEvent" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="RunningDbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="RunningActivity">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Activity" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="RunningEvents" Relationship="Self.FK__RunningEv__Activ__173876EA" FromRole="RunningActivity" ToRole="RunningEvent" />
+        </EntityType>
+        <EntityType Name="RunningEvent">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PersonId" Type="Int32" Nullable="false" />
+          <Property Name="ActivityId" Type="Int32" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Duration" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Distance" Type="Double" />
+          <Property Name="UnitId" Type="Int32" Nullable="false" />
+          <Property Name="Race" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Notes" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="RunningActivity" Relationship="Self.FK__RunningEv__Activ__173876EA" FromRole="RunningEvent" ToRole="RunningActivity" />
+          <NavigationProperty Name="RunningPerson" Relationship="Self.FK__RunningEv__Perso__182C9B23" FromRole="RunningEvent" ToRole="RunningPerson" />
+          <NavigationProperty Name="RunningUnit" Relationship="Self.FK__RunningEv__UnitI__1920BF5C" FromRole="RunningEvent" ToRole="RunningUnit" />
+        </EntityType>
+        <EntityType Name="RunningPerson">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Person" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="RunningEvents" Relationship="Self.FK__RunningEv__Perso__182C9B23" FromRole="RunningPerson" ToRole="RunningEvent" />
+        </EntityType>
+        <EntityType Name="RunningUnit">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Unit" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="RunningEvents" Relationship="Self.FK__RunningEv__UnitI__1920BF5C" FromRole="RunningUnit" ToRole="RunningEvent" />
+        </EntityType>
+        <Association Name="FK__RunningEv__Activ__173876EA">
+          <End Role="RunningActivity" Type="Self.RunningActivity" Multiplicity="1" />
+          <End Role="RunningEvent" Type="Self.RunningEvent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RunningActivity">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="RunningEvent">
+              <PropertyRef Name="ActivityId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__RunningEv__Perso__182C9B23">
+          <End Role="RunningPerson" Type="Self.RunningPerson" Multiplicity="1" />
+          <End Role="RunningEvent" Type="Self.RunningEvent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RunningPerson">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="RunningEvent">
+              <PropertyRef Name="PersonId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__RunningEv__UnitI__1920BF5C">
+          <End Role="RunningUnit" Type="Self.RunningUnit" Multiplicity="1" />
+          <End Role="RunningEvent" Type="Self.RunningEvent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RunningUnit">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="RunningEvent">
+              <PropertyRef Name="UnitId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Juggle4Food_RunningEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="RunningActivities" EntityType="Self.RunningActivity" />
+          <EntitySet Name="RunningEvents" EntityType="Self.RunningEvent" />
+          <EntitySet Name="RunningPersons" EntityType="Self.RunningPerson" />
+          <EntitySet Name="RunningUnits" EntityType="Self.RunningUnit" />
+          <AssociationSet Name="FK__RunningEv__Activ__173876EA" Association="Self.FK__RunningEv__Activ__173876EA">
+            <End Role="RunningActivity" EntitySet="RunningActivities" />
+            <End Role="RunningEvent" EntitySet="RunningEvents" />
+          </AssociationSet>
+          <AssociationSet Name="FK__RunningEv__Perso__182C9B23" Association="Self.FK__RunningEv__Perso__182C9B23">
+            <End Role="RunningPerson" EntitySet="RunningPersons" />
+            <End Role="RunningEvent" EntitySet="RunningEvents" />
+          </AssociationSet>
+          <AssociationSet Name="FK__RunningEv__UnitI__1920BF5C" Association="Self.FK__RunningEv__UnitI__1920BF5C">
+            <End Role="RunningUnit" EntitySet="RunningUnits" />
+            <End Role="RunningEvent" EntitySet="RunningEvents" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="RunningDbModelStoreContainer" CdmEntityContainer="Juggle4Food_RunningEntities">
+          <EntitySetMapping Name="RunningActivities">
+            <EntityTypeMapping TypeName="RunningDbModel.RunningActivity">
+              <MappingFragment StoreEntitySet="RunningActivity">
+                <ScalarProperty Name="Activity" ColumnName="Activity" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RunningEvents">
+            <EntityTypeMapping TypeName="RunningDbModel.RunningEvent">
+              <MappingFragment StoreEntitySet="RunningEvent">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="PersonId" ColumnName="PersonId" />
+                <ScalarProperty Name="ActivityId" ColumnName="ActivityId" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Duration" ColumnName="Duration" />
+                <ScalarProperty Name="Distance" ColumnName="Distance" />
+                <ScalarProperty Name="UnitId" ColumnName="UnitId" />
+                <ScalarProperty Name="Race" ColumnName="Race" />
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RunningPersons">
+            <EntityTypeMapping TypeName="RunningDbModel.RunningPerson">
+              <MappingFragment StoreEntitySet="RunningPerson">
+                <ScalarProperty Name="Person" ColumnName="Person" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RunningUnits">
+            <EntityTypeMapping TypeName="RunningDbModel.RunningUnit">
+              <MappingFragment StoreEntitySet="RunningUnit">
+                <ScalarProperty Name="Unit" ColumnName="Unit" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,145 @@
+﻿@{
+    ViewBag.Title = "Home";
+    Layout = "~/Views/Shared/_Unify.cshtml";
+}
+
+<!--=== Promo Block ===-->
+<div class="margin-bottom-20" style="padding-top:20px; background-color: black; text-align: center; ">
+    <div class="container" data-start="opacity: 1;" data-320="opacity: 0;">
+        <h1 class="margin-bottom-30" style="font-size: 45px; line-height: 45px; color: #dddddd;">FORTRESS OF DUALITUDE</h1>
+        <p style="font-weight: normal; letter-spacing: 1px; color: #dddddd;">THE EPIC TALES OF RUNNING <br> WITH SCOTT AND CRYSTAL</p><br>
+    </div>
+</div>
+<!--=== End Promo Block ===-->
+
+<div class="heading heading-v1">
+    <h2>Upcoming <span class="color-green">Races</span></h2>
+</div>
+<div class="bg-grey">
+    <div class="container content-sm">
+        <div class="row">
+            <div class="col-md-6 md-margin-bottom-40">
+                <div class="funny-boxes funny-boxes-top-purple bg-color-white">
+                    <div class="row">
+                        <div class="col-md-4 funny-boxes-img">
+                            <h2>Next Race</h2>
+                            <i class="icon-custom icon-lg icon-bg-purple fa fa-thumbs-up"></i>
+
+                        </div>
+                        <div class="col-md-8">
+                            <h2><a href="#">@Model.NextRace</a></h2>
+
+                            <p>
+                                <ul class="list-unstyled">
+                                    <li><i class="fa-fw fa fa-briefcase"></i> @Model.NextRaceDate</li>
+                                    <li><i class="fa-fw fa fa-map-marker"></i> @Model.NextRaceLocation</li>
+                                </ul>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 md-margin-bottom-40">
+                <div class="funny-boxes funny-boxes-top-purple bg-color-white">
+                    <div class="row">
+                        <div class="col-md-4 funny-boxes-img">
+                            <h2>Next Marathon</h2>
+                            <i class="icon-custom icon-lg icon-bg-purple fa fa-thumbs-up"></i>
+
+                        </div>
+                        <div class="col-md-8">
+                            <h2><a href="#">@Model.NextMarathon</a></h2>
+
+                            <p>
+                                <ul class="list-unstyled">
+                                    <li><i class="fa-fw fa fa-briefcase"></i> @Model.NextMarathonDate</li>
+                                    <li><i class="fa-fw fa fa-map-marker"></i> @Model.NextMarathonLocation</li>
+                                </ul>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<br />
+<div class="heading heading-v1">
+    <h2>Our <span class="color-green">Team</span></h2>
+    <p>This is where we can put all sorts of stuff about us if we wanted to go on and on about our amazing abilities. I just can't say too much or too little about these people!</p>
+</div>
+
+<!-- Parallax about us -->
+<div class="container content cke_dark_background" style="max-width: 700px;">
+    <div class="row">
+        <!-- Team v2 -->
+        <div class="col-md-6 col-sm-6 border-active">
+            <div class="team-v2">
+                <img class="img-responsive" src="~/Images/scott.jpg" alt="">
+                <div class="inner-team">
+                    <h3>Scott McKelvey</h3>
+                    <small class="color-green">Software Architect</small>
+                    <p>I'm a pleasant fellow, charming, honest, ambitious, quite bright, and very modest.</p>
+                    <hr>
+                    <a href="#">More!</a>
+                </div>
+            </div>
+        </div>
+        <!-- End Team v2 -->
+        <!-- Team v2 -->
+        <div class="col-md-6 col-sm-6 border-black">
+            <div class="team-v2">
+                <img class="img-responsive" src="~/Images/crystal.jpg" alt="">
+                <div class="inner-team">
+                    <h3>Crystal Eon</h3>
+                    <small class="color-green">Project Manager</small>
+                    <p>A very nice young lady.</p>
+                    <hr>
+                    <a href="#">More!</a>
+                </div>
+            </div>
+        </div>
+        <!-- End Team v2 -->
+
+
+    </div>
+</div>
+
+<!-- End Parallax About Us -->
+<!--=== Parallax Counter v1 ===-->
+<div class="parallax-counter-v2 parallaxBg" style="background-position: 50% -320px;">
+    <div class="container">
+        <h2 class="title-v2 title-dark title-center">NUMBERS DON'T LIE</h2>
+        <p class="text-center color-dark">Our running journey began in 2012 training for a Half Marathon on a whim to run with Dad and has been expanding ever since.  We've experienced highs and lows, success and injury, and continue to run on.</p>
+
+        <div class="margin-bottom-40"></div>
+
+        <div class="row">
+            <div class="col-sm-3 col-xs-6 md-margin-bottom-20">
+                <div class="counters">
+                    <span class="counter">@Model.TotalYears</span>
+                    <h4>Years</h4>
+                </div>
+            </div>
+            <div class="col-sm-3 col-xs-6 md-margin-bottom-20">
+                <div class="counters">
+                    <span class="counter">@Model.TotalRuns</span>
+                    <h4>Runs</h4>
+                </div>
+            </div>
+            <div class="col-sm-3 col-xs-6">
+                <div class="counters">
+                    <span class="counter">@Model.TotalHours</span>
+                    <h4>Hours</h4>
+                </div>
+            </div>
+            <div class="col-sm-3 col-xs-6">
+                <div class="counters">
+                    <span class="counter">@Model.TotalMiles</span>
+                    <h4>Miles</h4>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--=== End Parallax Counter v1 ===-->

@@ -1,0 +1,23 @@
+﻿@model Website.Models.Password
+@{
+    ViewBag.Title = "Sign In";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using (Html.BeginForm("Login"))
+{
+    <div>
+        <fieldset>
+            <legend>Login</legend>
+
+            <div class="editor-label">
+                @Html.LabelFor(p => p.Value)
+            </div>
+            <div class="editor-field">
+                @Html.TextBoxFor(p => p.Value)
+            </div>
+            
+            <input type="submit" value="Authenticate" />
+        </fieldset>
+    </div>
+}

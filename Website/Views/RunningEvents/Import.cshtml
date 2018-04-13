@@ -1,0 +1,30 @@
+﻿@{
+    ViewBag.Title = "Import";
+}
+
+<h2>Import</h2>
+
+@using (Html.BeginForm("Import", "RunningEvents", FormMethod.Post, new {enctype = "multipart/form-data"}))
+{
+    <div class="form-horizontal">
+        <div class="form-group">
+            Note: it won't create duplicates for entries with the same date and equal/similar distance (+/- 1 mile), but try to trim the records some so it doesn't take as long.
+            <div class="control-label col-md-2">User:</div>
+            <div class="col-md-10">
+                @Html.DropDownList("PersonId", null, htmlAttributes: new { @class = "form-control" })
+            </div>
+            <div class="control-label col-md-2">CSV from Garmin:</div>
+            <div class="col-md-10">
+                <input type="file" id="File" name="File" class=""/>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Upload" id="btnSubmit" class="btn btn-primary"/> @ViewBag.Message
+            </div>
+        </div>
+        
+        
+
+    </div>
+}
